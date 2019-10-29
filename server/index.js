@@ -9,9 +9,9 @@ const cors = require("cors");
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
 
-const PORT = process.env.PORT || 5000;
-
 const router = require("./router");
+
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 const server = http.createServer(app);
@@ -35,7 +35,7 @@ io.on("connect", socket => {
 
     socket.broadcast.to(user.room).emit("message", {
       user: "watch-bot",
-      text: `${user.name}, has arrived!`
+      text: `New user: ${user.name}, has arrived!`
     }); //.broadcast will send to everyone besides the sender, here we are using it to notify everyone else in the room that this user has entered the room
 
     io.to(user.room).emit("roomData", {
@@ -52,19 +52,34 @@ io.on("connect", socket => {
     //callback();  /we are going to put it above for now      // <<< you can do some error handling in this callback that is triggered on 'join'
   });
 
+  //   ***DEBUGGING***
+  /////////////////////////// d
+  // socket.on("sendMessage", (message, callback) => {
+  //   console.log("this is the socket.id:" + getUser(socket.id));
+  //   const user = getUser(socket.id);
+  //   console.log(getUser(socket.id));
+  //   console.log(user);
+  //   if (user.room !== undefined && user.name !== undefined) {
+  //     console.log("error: no room or name saved");
+  //     console.log(user);
+  //     io.to(user.room).emit("message", {
+  //       user: user.name,
+  //       text: message
+  //     });
+  //   }
+  //   callback();
+  // });
+  ////////////////////////
   socket.on("sendMessage", (message, callback) => {
     const user = getUser(socket.id);
-    if (user.room !== undefined && user.name !== undefined) {
-      console.log("error: no room or name saved");
-
-      io.to(user.room).emit("message", {
-        user: user.name,
-        text: message
-      });
+    if (user) {
+      io.to(user.room).emit("message", { user: user.name, text: message });
+      callback(message);
     }
-    callback();
-  });
+    console.log("user = undefined : couldn't send message=>" + message);
 
+    // callback(message);
+  });
   socket.on("disconnect", () => {
     const user = removeUser(socket.id);
 

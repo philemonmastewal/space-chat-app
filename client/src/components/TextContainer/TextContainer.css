@@ -26,7 +26,7 @@
 .textContainer h1 {
   color: #000000;
   margin-bottom: 0px;
-  text-shadow: 0 0 20px linear-gradient(120deg, #3498db, #8e44ad);
+  text-shadow: 0 0 10px rgb(150, 3, 255);
 }
 
 @media (min-width: 320px) and (max-width: 1200px) {

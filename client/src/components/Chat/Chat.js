@@ -63,6 +63,9 @@ const Chat = ({ location }) => {
     if (message) {
       socket.emit("sendMessage", message, () => setMessage(""));
     }
+    // alert(
+    //   "Sorry, you need to sign to send messages: You can try refreshing the page or returning to the Join page"
+    // );
   };
 
   console.log(message, messages);

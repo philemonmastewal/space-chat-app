@@ -1,0 +1,25 @@
+{
+  "name": "space-chat-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd client && npm start",
+    "server": "cd server && npm start",
+    "start": "concurrently \"npm run server\" \"npm run client\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philemonmastewal/space-chat-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/philemonmastewal/space-chat-app/issues"
+  },
+  "homepage": "https://github.com/philemonmastewal/space-chat-app#readme",
+  "dependencies": {
+    "concurrently": "^5.0.0"
+  }
+}
