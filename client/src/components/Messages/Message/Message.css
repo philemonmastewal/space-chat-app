@@ -13,6 +13,7 @@
   float: left;
   font-size: 1.1em;
   word-wrap: break-word;
+  margin: 10px;
 }
 
 .messageText img {
@@ -58,8 +59,8 @@
   color: #353535;
 }
 
-.backgroundBlue {
-  background: #2979ff;
+.backgroundPurple {
+  background: #6a00ff;
 }
 
 .backgroundLight {
