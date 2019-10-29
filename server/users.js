@@ -17,7 +17,10 @@ const addUser = ({ id, name, room }) => {
   );
 
   if (!name || !room) return { error: "Must provide username and room. " };
-  if (existingUser) return { error: "Username is taken" };
+  if (existingUser)
+    return {
+      error: "Username is taken, hit your back button and pick another please"
+    };
 
   // if the username is not taken, we will instantiate the new user below, and then we will push them into our users array
   const user = { id, name, room };

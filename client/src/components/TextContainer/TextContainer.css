@@ -24,6 +24,7 @@
 
 .textContainer h1 {
   margin-bottom: 0px;
+  text-shadow: 0 0 25px #6a00ff;
 }
 
 @media (min-width: 320px) and (max-width: 1200px) {

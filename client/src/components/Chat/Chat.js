@@ -69,22 +69,33 @@ const Chat = ({ location }) => {
 
   return (
     <div className="outerContainer">
-      <div className="container">
-        <InfoBar room={room} />
-        <Messages messages={messages} name={name} />
-        <Input
-          message={message}
-          setMessage={setMessage}
-          sendMessage={sendMessage}
-        />
+      <div className="stars">
+        <div className="star star1"></div>
+        <div className="star star2"></div>
+        <div className="star star3"></div>
+        <div className="star star4"></div>
+        <div className="star star5"></div>
+        <div className="star star6"></div>
+        <div className="star star7"></div>
+        <div className="star star8"></div>
 
-        {/* <input                // <<<< this will be handeled in input component instead of here
+        <div className="container">
+          <InfoBar room={room} />
+          <Messages messages={messages} name={name} />
+          <Input
+            message={message}
+            setMessage={setMessage}
+            sendMessage={sendMessage}
+          />
+
+          {/* <input                // <<<< this will be handeled in input component instead of here
           value={message}
           onChange={event => setMessage(event.target.value)}
           onKeyPress={event => (event.key === "Enter" ? sendMessage() : null)}
         /> */}
+        </div>
+        <TextContainer users={users} />
       </div>
-      <TextContainer users={users} />
     </div>
   );
 };

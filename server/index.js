@@ -29,13 +29,14 @@ io.on("connect", socket => {
     socket.join(user.room); //builtin method that joins to a room that is passed in from user object through user.room
 
     socket.emit("message", {
-      user: "admin-bot",
+      user: "welcome-bot",
       text: `${user.name}, welcome to the room: ${user.room}`
     });
 
-    socket.broadcast
-      .to(user.room)
-      .emit("message", { user: "admin", text: `${user.name}, has arrived!` }); //.broadcast will send to everyone besides the sender, here we are using it to notify everyone else in the room that this user has entered the room
+    socket.broadcast.to(user.room).emit("message", {
+      user: "watch-bot",
+      text: `${user.name}, has arrived!`
+    }); //.broadcast will send to everyone besides the sender, here we are using it to notify everyone else in the room that this user has entered the room
 
     io.to(user.room).emit("roomData", {
       room: user.room,
@@ -53,9 +54,14 @@ io.on("connect", socket => {
 
   socket.on("sendMessage", (message, callback) => {
     const user = getUser(socket.id);
+    if (user.room !== undefined && user.name !== undefined) {
+      console.log("error: no room or name saved");
 
-    io.to(user.room).emit("message", { user: user.name, text: message });
-
+      io.to(user.room).emit("message", {
+        user: user.name,
+        text: message
+      });
+    }
     callback();
   });
 
@@ -64,7 +70,7 @@ io.on("connect", socket => {
 
     if (user) {
       io.to(user.room).emit("message", {
-        user: "admin" - bot2,
+        user: "exit-bot",
         text: `${user.name} has left.`
       });
       io.to(user.room).emit("roomData", {
